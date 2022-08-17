@@ -1,3 +1,3 @@
-<p>遥感图像监督分类</p>
-<p>用OpenCV和MFC写的</p>
-<p>交互获取AOI然后采用掩码的方法获得AOI的三波段均值，然后计算距离开始分类</p>
+<p>Remote sensing image classification</p>
+<p>Written in MFC and with OpenCV library</p>
+<p>Interactively obtain AOI for each class and calculate mean pixel values for three channels using a mask, then classify according to minimal distance</p>
