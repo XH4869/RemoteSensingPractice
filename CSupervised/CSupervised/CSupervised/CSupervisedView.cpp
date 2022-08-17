@@ -1,10 +1,10 @@
 
-// CSupervisedView.cpp : CCSupervisedView ÀàµÄÊµÏÖ
+// CSupervisedView.cpp : CCSupervisedView ç±»çš„å®ç°
 //
 
 #include "stdafx.h"
-// SHARED_HANDLERS ¿ÉÒÔÔÚÊµÏÖÔ¤ÀÀ¡¢ËõÂÔÍ¼ºÍËÑË÷É¸Ñ¡Æ÷¾ä±úµÄ
-// ATL ÏîÄ¿ÖĞ½øĞĞ¶¨Òå£¬²¢ÔÊĞíÓë¸ÃÏîÄ¿¹²ÏíÎÄµµ´úÂë¡£
+// SHARED_HANDLERS å¯ä»¥åœ¨å®ç°é¢„è§ˆã€ç¼©ç•¥å›¾å’Œæœç´¢ç­›é€‰å™¨å¥æŸ„çš„
+// ATL é¡¹ç›®ä¸­è¿›è¡Œå®šä¹‰ï¼Œå¹¶å…è®¸ä¸è¯¥é¡¹ç›®å…±äº«æ–‡æ¡£ä»£ç ã€‚
 #ifndef SHARED_HANDLERS
 #include "CSupervised.h"
 #endif
@@ -22,7 +22,7 @@
 IMPLEMENT_DYNCREATE(CCSupervisedView, CView)
 
 BEGIN_MESSAGE_MAP(CCSupervisedView, CView)
-	// ±ê×¼´òÓ¡ÃüÁî
+	// æ ‡å‡†æ‰“å°å‘½ä»¤
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
@@ -38,12 +38,12 @@ BEGIN_MESSAGE_MAP(CCSupervisedView, CView)
 	ON_COMMAND(ID_Supervised, &CCSupervisedView::OnSupervised)
 END_MESSAGE_MAP()
 
-// CCSupervisedView ¹¹Ôì/Îö¹¹
+// CCSupervisedView æ„é€ /ææ„
 
 CCSupervisedView::CCSupervisedView()
 	: m_type(0)
 {
-	// TODO: ÔÚ´Ë´¦Ìí¼Ó¹¹Ôì´úÂë
+	// TODO: åœ¨æ­¤å¤„æ·»åŠ æ„é€ ä»£ç 
 	for (int i = 0; i < 5; i++)
 	{
 		type[i].b3 = type[i].b4 = type[i].b5 = 0;
@@ -56,13 +56,13 @@ CCSupervisedView::~CCSupervisedView()
 
 BOOL CCSupervisedView::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO: ÔÚ´Ë´¦Í¨¹ıĞŞ¸Ä
-	//  CREATESTRUCT cs À´ĞŞ¸Ä´°¿ÚÀà»òÑùÊ½
+	// TODO: åœ¨æ­¤å¤„é€šè¿‡ä¿®æ”¹
+	//  CREATESTRUCT cs æ¥ä¿®æ”¹çª—å£ç±»æˆ–æ ·å¼
 
 	return CView::PreCreateWindow(cs);
 }
 
-// CCSupervisedView »æÖÆ
+// CCSupervisedView ç»˜åˆ¶
 
 void CCSupervisedView::OnDraw(CDC* pDC)
 {
@@ -71,8 +71,8 @@ void CCSupervisedView::OnDraw(CDC* pDC)
 	if (!pDoc)
 		return;
 
-	// TODO: ÔÚ´Ë´¦Îª±¾»úÊı¾İÌí¼Ó»æÖÆ´úÂë
-    Mat newImage;
+	// TODO: åœ¨æ­¤å¤„ä¸ºæœ¬æœºæ•°æ®æ·»åŠ ç»˜åˆ¶ä»£ç 
+    	Mat newImage;
 	if (pDoc->img.channels() == 1)
 	{
 		cvtColor(pDoc->img, newImage, CV_GRAY2BGRA);
@@ -87,33 +87,33 @@ void CCSupervisedView::OnDraw(CDC* pDC)
 	}
 	Gdiplus::Bitmap bitmap(newImage.cols, newImage.rows, newImage.step1(), PixelFormat32bppARGB, newImage.data);
 
-	//Gdiplus::Bitmap bitmap(pDoc->img.cols, pDoc->img.rows, pDoc->img.step, //Ã¿Ò»ĞĞµÄ×Ö½ÚÊı
+	//Gdiplus::Bitmap bitmap(pDoc->img.cols, pDoc->img.rows, pDoc->img.step, //æ¯ä¸€è¡Œçš„å­—èŠ‚æ•°
 	//	PixelFormat24bppRGB, pDoc->img.data);
 	Gdiplus::Graphics graphics(pDC->GetSafeHdc());
 	graphics.DrawImage(&bitmap, 0, 0);
 }
 
 
-// CCSupervisedView ´òÓ¡
+// CCSupervisedView æ‰“å°
 
 BOOL CCSupervisedView::OnPreparePrinting(CPrintInfo* pInfo)
 {
-	// Ä¬ÈÏ×¼±¸
+	// é»˜è®¤å‡†å¤‡
 	return DoPreparePrinting(pInfo);
 }
 
 void CCSupervisedView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
-	// TODO: Ìí¼Ó¶îÍâµÄ´òÓ¡Ç°½øĞĞµÄ³õÊ¼»¯¹ı³Ì
+	// TODO: æ·»åŠ é¢å¤–çš„æ‰“å°å‰è¿›è¡Œçš„åˆå§‹åŒ–è¿‡ç¨‹
 }
 
 void CCSupervisedView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
-	// TODO: Ìí¼Ó´òÓ¡ºó½øĞĞµÄÇåÀí¹ı³Ì
+	// TODO: æ·»åŠ æ‰“å°åè¿›è¡Œçš„æ¸…ç†è¿‡ç¨‹
 }
 
 
-// CCSupervisedView Õï¶Ï
+// CCSupervisedView è¯Šæ–­
 
 #ifdef _DEBUG
 void CCSupervisedView::AssertValid() const
@@ -126,7 +126,7 @@ void CCSupervisedView::Dump(CDumpContext& dc) const
 	CView::Dump(dc);
 }
 
-CCSupervisedDoc* CCSupervisedView::GetDocument() const // ·Çµ÷ÊÔ°æ±¾ÊÇÄÚÁªµÄ
+CCSupervisedDoc* CCSupervisedView::GetDocument() const // éè°ƒè¯•ç‰ˆæœ¬æ˜¯å†…è”çš„
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CCSupervisedDoc)));
 	return (CCSupervisedDoc*)m_pDocument;
@@ -134,47 +134,47 @@ CCSupervisedDoc* CCSupervisedView::GetDocument() const // ·Çµ÷ÊÔ°æ±¾ÊÇÄÚÁªµÄ
 #endif //_DEBUG
 
 
-// CCSupervisedView ÏûÏ¢´¦Àí³ÌĞò
+// CCSupervisedView æ¶ˆæ¯å¤„ç†ç¨‹åº
 
 
 void CCSupervisedView::OnWater()
 {
-	// TODO: ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	m_type = 1;
 }
 
 
 void CCSupervisedView::OnPlant()
 {
-	// TODO: ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	m_type = 2;
 }
 
 
 void CCSupervisedView::OnCity()
 {
-	// TODO: ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	m_type = 3;
 }
 
 
 void CCSupervisedView::OnRoad()
 {
-	// TODO: ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	m_type = 4;
 }
 
 
 void CCSupervisedView::OnGround()
 {
-	// TODO: ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	m_type = 5;
 }
 
 
 void CCSupervisedView::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	// TODO: ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO: åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	pts.push_back(point);
 
 	CView::OnLButtonDown(nFlags, point);
@@ -183,7 +183,7 @@ void CCSupervisedView::OnLButtonDown(UINT nFlags, CPoint point)
 
 void CCSupervisedView::OnRButtonDown(UINT nFlags, CPoint point)
 {
-	// TODO: ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO: åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 	CPoint tmp(pts[0].x, pts[0].y);
 	CDC *pDC = GetDC();
 	CPen NewPen, *pOldPen;
@@ -207,7 +207,7 @@ void CCSupervisedView::OnRButtonDown(UINT nFlags, CPoint point)
 
 void CCSupervisedView::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
-	// TODO: ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+	// TODO: åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
 
 	CView::OnLButtonDblClk(nFlags, point);
 }
@@ -215,7 +215,7 @@ void CCSupervisedView::OnLButtonDblClk(UINT nFlags, CPoint point)
 
 void CCSupervisedView::OnCalculate()
 {
-	// TODO: ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Mat img = imread("band_345.bmp");
 	Mat dst, roi = Mat::zeros(img.size(), CV_8U);
 	vector<vector<cv::Point>> contour;
@@ -269,7 +269,7 @@ void CCSupervisedView::OnCalculate()
 
 void CCSupervisedView::OnSupervised()
 {
-	// TODO: ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌĞò´úÂë
+	// TODO: åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
 	Mat img = imread("band_345.bmp");
 	Mat classified;
 	classified.create(img.size(), CV_8UC3);
