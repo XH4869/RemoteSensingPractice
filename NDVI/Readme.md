@@ -1,2 +1,2 @@
-<p>NDVI计算与植被检测</p>
-<p>OpenCV<strong>2+</strong>版本</p>
+<p>NDVI calculation</p>
+<p>Using OpenCV<strong>2+</strong></p>
