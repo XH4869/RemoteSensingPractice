@@ -1,2 +1,2 @@
 # RemoteSensingPractice
-遥感原理与应用编程部分（监督分类和NDVI）
+Homework for course Remote Sensing Practice: Supervised classification and NDVI calculation
